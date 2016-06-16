@@ -1,9 +1,7 @@
-<li>{{rental-in-component.owner}}'s {{rental-in-component.type}} in {{rental-in-component.city}}
+<li>{{#link-to 'rental' rental.id}}{{rental.owner}}'s {{rental.type}} in {{rental.city.name}}
   {{#if isImageShowing }}
-  <p><img src={{rental-in-component.image}} alt={{rental-in-component.type}} {{action 'imageHide'}}></p>
+  <p><img src={{rental.image}} alt={{rental.type}} {{action 'imageHide'}}></p>
  {{else}}
    <button {{action 'imageShow'}}>Show image</button>
-{{/if}}
-{{update-rental rental-in-component=rental-in-component update="update"}}
-  <button {{action 'delete' rental-in-component}}>Delete</button>
+{{/if}} {{/link-to}}
 </li>

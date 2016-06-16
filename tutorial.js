@@ -50,19 +50,19 @@
       * this will look like 'app/templates/components/rental-tile.hbs'
 
 15. Add {{#each}} helper to index.hbs in order to display rental-tile.hbs: //refer to HELPERS
-    * {{#each model as |rental-from-template|}}
-        {{rental-tile rental-in-component=rental-from-template}} //left rental-in-component needs to match with all located in rental-tile.js and hbs
-      {{/each}}                                                  //right rental-in-component needs to match |rental-from-template|
+    * {{#each model as |rental|}}
+        {{rental-tile rental=rental}} //left rental needs to match with all located in rental-tile.js and hbs
+      {{/each}}                                                  //right rental needs to match |rental|
 
 16. Add code to rental-tile.hbs template to display owner, type, and city.
 <li>
-    {{rental-in-component.owner}}
-    {{rental-in-component.type}}
-    {{rental-in-component.city}}
+    {{rental.owner}}
+    {{rental.type}}
+    {{rental.city}}
     // 17. Add action helper to display show/hide image:
     //     * add if statement
           * {{#if imageShowing}}
-              <p><img src={{rental-in-component.image}} alt={{rental-in-component.type}} {{action 'hideImage'}}></p>
+              <p><img src={{rental.image}} alt={{rental.type}} {{action 'hideImage'}}></p>
             {{else}}
               <button {{action 'showImage'}}>Show image</button>
 </li>
@@ -83,7 +83,7 @@
 19. Create delete button to rental-tile.hbs component
     * <li>
           ...
-          <button {{ action 'delete' rental-in-component}}> DELETE </button>
+          <button {{ action 'delete' rental}}> DELETE </button>
       </li>
 
     20. Pass 'delete' action to rental-tile.js component
@@ -101,7 +101,7 @@
                   }
                 }
                 22. transitionTo 'index' template:
-                {{rental-tile rental-in-component = rental-from-template destroyRental='destroyRental'}} //left destroy needs to match rental-tile.js
+                {{rental-tile rental = rental destroyRental='destroyRental'}} //left destroy needs to match rental-tile.js
                                                                                                          //right destroyRental needs to match index.js
 
 ================================================================================
@@ -157,9 +157,9 @@
 30. Add update-rental display code into child component (rental-tile.hbs) template:
     *<li>
       // {{#if}}...{{/if}}
-      {{update-rental rental-in-component=rental-from-template update="updateToTemplate"}}
+      {{update-rental rental=rental update="updateToTemplate"}}
       ...
-      // <button {{action 'delete' rental-in-component}}Delete</button>
+      // <button {{action 'delete' rental}}Delete</button>
     </li>
 
 31. Add form inside update-rental.hbs template: //refer to
@@ -196,7 +196,7 @@
                 //  delete()
                 // }
               34. Add updateToTemplate in index.hbs to display update form:
-                  {{rental-tile rental-in-component=rental-from-template updateToTemplate="finalUpdate"}}
+                  {{rental-tile rental=rental updateToTemplate="finalUpdate"}}
 
                   35. Add update action to index.js route handler:
                       * },
@@ -325,14 +325,14 @@ KK. new-rental form format:
     </div>
 
 LL. update-rental form format:
-<h4>Update {{rental-in-component.owner}}{{rental-in-component.type}}</h4>
+<h4>Update {{rental.owner}}{{rental.type}}</h4>
   <div>
     <form>
       <div class='form-group'>
       <lable for="owner">Owner</label>
       {{input value=owner id="owner" placeholder=rental-in-incomponent.type}}
       </div>
-      <button {{action 'updateInComponent' rental-in-component}}>Save</button>
+      <button {{action 'updateInComponent' rental}}>Save</button>
     </form>
   </div>
 

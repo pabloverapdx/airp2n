@@ -1,9 +1,12 @@
-
-
-
-
-
-
-
-
-{{outlet}}
+<div class="container">
+  <header class = "jumbotron">
+    <h1>AirP2N</h1>
+  </header>
+    {{outlet}}
+  <hr>
+  <footer>
+    {{#link-to 'contact'}}Contact{{/link-to}}
+    <br>
+    {{#link-to 'index'}}Home{{/link-to}}
+  </footer>
+</div>
